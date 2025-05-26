@@ -1,15 +1,15 @@
-# Main Zsh config
+# 1. Source local overrides first (you've renamed mac.zsh → local.zsh)
+[[ -f "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh" ]] && source "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh"
 
-# Load custom components
-source "${HOME}/mortworks/dotfiles/aliases.zsh"
-source "${HOME}/mortworks/dotfiles/functions.zsh"
-source "${HOME}/mortworks/dotfiles/exports.zsh"
+# 2. Fallback if DOTFILES isn't already set
+if [[ -z "$DOTFILES" ]]; then
+  export DOTFILES="${HOME}/dotfiles"
+fi
 
-# Optional: Enable Oh My Zsh, plugins, or themes here
+# 3. Source the main config files
+[[ -f "${DOTFILES}/aliases.zsh" ]]   && source "${DOTFILES}/aliases.zsh"
+[[ -f "${DOTFILES}/functions.zsh" ]] && source "${DOTFILES}/functions.zsh"
+[[ -f "${DOTFILES}/exports.zsh" ]]   && source "${DOTFILES}/exports.zsh"
 
-# Placeholder for shell prompt (custom or Powerlevel10k/starship later)
-
-# Welcome message
 echo "Welcome, mortworks 👋  Ready to work."
 
-# Custom startup logic here
