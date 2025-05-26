@@ -1,0 +1,2 @@
+# Ignore system files or local-only stuff
+.DS_Store
