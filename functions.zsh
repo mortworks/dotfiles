@@ -8,7 +8,7 @@ mkcd() {
 
 # Switch to mortworks workspace
 mortworks() {
-  cd ~/Workspace/Dev/Projects/mortworks/dotfiles
+  cd "$DOTFILES"
   echo "🛠  Mortworks mode activated."
   ls
 }
