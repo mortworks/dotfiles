@@ -1,9 +1,7 @@
 # ----------------------------------------
-# 🧠 Local environment overrides (per device or per platform)
+# 🧠 Local environment overrides (per device)
 # ----------------------------------------
-if [[ -f "${HOME}/dotfiles/local/local.zsh" ]]; then
-  source "${HOME}/dotfiles/local/local.zsh"
-fi
+[[ -f "${HOME}/dotfiles/local/local.zsh" ]] && source "${HOME}/dotfiles/local/local.zsh"
 
 # ----------------------------------------
 # 📁 Fallback: Set DOTFILES path if not set
