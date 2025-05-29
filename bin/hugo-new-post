@@ -1,9 +1,23 @@
 #!/bin/bash
 
-# This wrapper ensures the tool runs from anywhere
+# Determine where this wrapper lives (not currently used, but may help later)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Adjust path to wherever the real script lives
-TOOL_ROOT="$HOME/Workspace/Dev/Projects/mortworks/workflow-tools/hugo-tools"
+# Use WORKFLOW_TOOLS if available, otherwise detect based on environment
+if [[ -n "$WORKFLOW_TOOLS" ]]; then
+  TOOL_ROOT="$WORKFLOW_TOOLS/hugo-tools"
+elif [[ "$CODESPACES" == "true" ]]; then
+  TOOL_ROOT="/workspaces/workflow-tools/hugo-tools"
+else
+  TOOL_ROOT="$HOME/Workspace/Dev/Projects/mortworks/workflow-tools/hugo-tools"
+fi
 
+# Fail gracefully if the target script doesn't exist
+if [[ ! -x "$TOOL_ROOT/bin/new.sh" ]]; then
+  echo "⚠️  Could not find hugo-tools script at: $TOOL_ROOT/bin/new.sh"
+  echo "Make sure the workflow-tools repo is cloned and in the right place."
+  exit 1
+fi
+
+# Run the actual tool with any passed arguments
 "$TOOL_ROOT/bin/new.sh" "$@"
