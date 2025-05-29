@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# This wrapper ensures the tool runs from anywhere
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Adjust path to wherever the real script lives
+TOOL_ROOT="$HOME/Workspace/Dev/Projects/mortworks/workflow-tools/hugo-tools"
+
+"$TOOL_ROOT/bin/new.sh" "$@"

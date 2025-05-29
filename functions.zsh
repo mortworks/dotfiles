@@ -5,3 +5,10 @@ mkcd() {
 }
 
 # Add more utility functions over time
+
+# Switch to mortworks workspace
+mortworks() {
+  cd ~/Workspace/Dev/Projects/mortworks/dotfiles
+  echo "🛠  Mortworks mode activated."
+  ls
+}
