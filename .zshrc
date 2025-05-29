@@ -1,7 +1,9 @@
 # ----------------------------------------
-# 🧠 Local environment overrides (per device)
+# 🧠 Local environment overrides (per device or per platform)
 # ----------------------------------------
-[[ -f "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh" ]] && source "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh"
+if [[ -f "${HOME}/dotfiles/local/local.zsh" ]]; then
+  source "${HOME}/dotfiles/local/local.zsh"
+fi
 
 # ----------------------------------------
 # 📁 Fallback: Set DOTFILES path if not set
@@ -26,7 +28,7 @@ export PATH="${DOTFILES}/bin:$PATH"
 # 🚀 Mortworks shortcut command
 # ----------------------------------------
 mw() {
-  cd ~/Workspace/Dev/Projects/mortworks/dotfiles
+  cd "$DOTFILES"
   echo "🛠  Mortworks mode activated."
   ls
 }
