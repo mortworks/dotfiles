@@ -10,6 +10,13 @@ if [[ -z "$DOTFILES" ]]; then
 fi
 
 # ----------------------------------------
+# 🐚 Fix $SHELL if it's incorrect (e.g. Codespaces)
+# ----------------------------------------
+if [[ -n "$ZSH_VERSION" && "$SHELL" != "$(command -v zsh)" ]]; then
+  export SHELL="$(command -v zsh)"
+fi
+
+# ----------------------------------------
 # 🧠 Local environment overrides (per device)
 # ----------------------------------------
 [[ -f "${DOTFILES}/local/local.zsh" ]] && source "${DOTFILES}/local/local.zsh"
