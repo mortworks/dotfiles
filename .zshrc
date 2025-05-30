@@ -10,6 +10,17 @@ if [[ -z "$DOTFILES" ]]; then
 fi
 
 # ----------------------------------------
+# 🌟 Use Oh My Zsh if available
+# ----------------------------------------
+if [[ -d "$HOME/.oh-my-zsh" ]]; then
+  export ZSH="$HOME/.oh-my-zsh"
+  ZSH_THEME="agnoster"  # Change to any theme you like
+  plugins=(git)
+
+  source "$ZSH/oh-my-zsh.sh"
+fi
+
+# ----------------------------------------
 # 🐚 Fix $SHELL if it's incorrect (e.g. Codespaces)
 # ----------------------------------------
 if [[ -n "$ZSH_VERSION" && "$SHELL" != "$(command -v zsh)" ]]; then
