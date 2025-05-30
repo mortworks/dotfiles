@@ -27,3 +27,10 @@ fi
 # Confirm
 echo "✅ Dotfiles installed and linked."
 echo "💡 Run 'source ~/.zshrc' to activate in current shell if needed."
+
+# Source .zshrc if we're in a Zsh shell to apply the environment immediately
+if [[ -n "$ZSH_VERSION" ]]; then
+  echo "💡 Sourcing .zshrc to activate settings"
+  source "$HOME/.zshrc"
+fi
+
