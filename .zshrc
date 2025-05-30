@@ -44,17 +44,13 @@ mw() {
 }
 
 # ----------------------------------------
-# 🗂 Automatically cd to Codespaces workspace roo
-# ----------------------------------------t
+# 🗂 Automatically cd to Codespaces workspace oro
+# ----------------------------------------
 if [[ -n "$CODESPACES" ]]; then
-  # Default to /workspaces/<repo-name> if available
-  if [[ -d "/workspaces" && -n "$GITHUB_REPOSITORY" ]]; then
-    cd "/workspaces/$(basename "$GITHUB_REPOSITORY")"
-  elif [[ -d "$PWD" ]]; then
-    cd "$PWD"
+  if [[ -n "$CODESPACE_VSCODE_FOLDER" && -d "$CODESPACE_VSCODE_FOLDER" ]]; then
+    cd "$CODESPACE_VSCODE_FOLDER"
   fi
 fi
-
 
 # ----------------------------------------
 # 👋 Friendly neutral startup message
