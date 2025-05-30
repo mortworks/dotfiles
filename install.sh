@@ -1,36 +1,50 @@
 #!/bin/bash
 
-# Set DOTFILES path if not already set
-DOTFILES="${DOTFILES:-$PWD}"
+set -e  # Exit on error
 
-# Symlink dotfiles into home directory
-echo "🔗 Linking dotfiles to $HOME"
+echo "📦 Installing dotfiles..."
+
+# Define the source and destination
+DOTFILES_SRC="$(pwd)"
+DOTFILES_DEST="$HOME/dotfiles"
+
+# If not already at destination, copy the repo there
+if [[ "$DOTFILES_SRC" != "$DOTFILES_DEST" ]]; then
+  echo "📁 Copying dotfiles to $DOTFILES_DEST"
+  cp -R "$DOTFILES_SRC" "$DOTFILES_DEST"
+fi
+
+# Export DOTFILES path
+export DOTFILES="$DOTFILES_DEST"
+
+# Symlink key config files into $HOME
+echo "🔗 Linking config files to $HOME"
 ln -sf "$DOTFILES/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES/functions.zsh" "$HOME/functions.zsh"
 ln -sf "$DOTFILES/aliases.zsh" "$HOME/aliases.zsh"
 ln -sf "$DOTFILES/exports.zsh" "$HOME/exports.zsh"
 
-# Optional: Symlink local config scripts (if present)
+# Optional: symlink local config for Codespaces
 if [[ -f "$DOTFILES/local/codespaces.zsh" ]]; then
+  echo "🔗 Linking codespaces.zsh"
   ln -sf "$DOTFILES/local/codespaces.zsh" "$HOME/.codespaces.zsh"
 fi
 
-# Ensure .zshrc is sourced on login
-if [[ ! -f "$HOME/.zprofile" || ! "$(grep -F 'source ~/.zshrc' "$HOME/.zprofile")" ]]; then
-  echo "source ~/.zshrc" >> "$HOME/.zprofile"
-  echo "✅ Added 'source ~/.zshrc' to .zprofile"
-elif [[ -f "$HOME/.profile" && ! "$(grep -F 'source ~/.zshrc' "$HOME/.profile")" ]]; then
-  echo "source ~/.zshrc" >> "$HOME/.profile"
-  echo "✅ Added 'source ~/.zshrc' to .profile"
+# Ensure ~/dotfiles/bin is executable and in PATH
+if [[ ":$PATH:" != *":$DOTFILES/bin:"* ]]; then
+  echo "➕ Adding $DOTFILES/bin to PATH"
+  export PATH="$DOTFILES/bin:$PATH"
 fi
 
-# Confirm
-echo "✅ Dotfiles installed and linked."
-echo "💡 Run 'source ~/.zshrc' to activate in current shell if needed."
-
-# Source .zshrc if we're in a Zsh shell to apply the environment immediately
-if [[ -n "$ZSH_VERSION" ]]; then
-  echo "💡 Sourcing .zshrc to activate settings"
-  source "$HOME/.zshrc"
+# Set shell to zsh if available and not already default (and not in Codespaces)
+if command -v zsh >/dev/null 2>&1 && [ "$SHELL" != "$(which zsh)" ]; then
+  if [ -z "$CODESPACES" ]; then
+    echo "⚙️  Changing default shell to zsh..."
+    chsh -s "$(which zsh)" || echo "⚠️  Could not change default shell. Try manually if needed."
+  else
+    echo "ℹ️  Running in Codespaces — skipping shell change"
+  fi
 fi
 
+echo "✅ Dotfiles install complete."
+echo "💡 Run 'source ~/.zshrc' to activate immediately in this session."
