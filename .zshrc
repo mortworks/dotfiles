@@ -1,10 +1,4 @@
 # ----------------------------------------
-# 🧠 Local environment overrides (per device)
-# ----------------------------------------
-[[ -f "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh" ]] && source "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh"
-[[ -f "${HOME}/dotfiles/local/codespaces.zsh" ]] && source "${HOME}/dotfiles/local/codespaces.zsh"
-
-# ----------------------------------------
 # 📁 Fallback: Set DOTFILES path if not already set
 # ----------------------------------------
 if [[ -z "$DOTFILES" ]]; then
@@ -14,6 +8,12 @@ if [[ -z "$DOTFILES" ]]; then
     export DOTFILES="${HOME}/Workspace/Dev/Projects/mortworks/dotfiles"
   fi
 fi
+
+# ----------------------------------------
+# 🧠 Local environment overrides (per device)
+# ----------------------------------------
+[[ -f "${DOTFILES}/local/local.zsh" ]] && source "${DOTFILES}/local/local.zsh"
+[[ -f "${DOTFILES}/local/codespaces.zsh" ]] && source "${DOTFILES}/local/codespaces.zsh"
 
 # ----------------------------------------
 # 🛠 Add custom scripts to PATH
