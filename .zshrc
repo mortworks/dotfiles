@@ -44,11 +44,19 @@ mw() {
 }
 
 # ----------------------------------------
-# 🗂 Automatically cd to Codespaces workspace oro
+# 🗂 Automatically cd to Codespaces workspaceroot
+# ----------------------------------------
+# ----------------------------------------
+# 🗂 Automatically cd to Codespaces workspace root
 # ----------------------------------------
 if [[ -n "$CODESPACES" ]]; then
   if [[ -n "$CODESPACE_VSCODE_FOLDER" && -d "$CODESPACE_VSCODE_FOLDER" ]]; then
     cd "$CODESPACE_VSCODE_FOLDER"
+  elif [[ -n "$GITHUB_REPOSITORY" ]]; then
+    repo_dir="/workspaces/$(basename "$GITHUB_REPOSITORY")"
+    if [[ -d "$repo_dir" ]]; then
+      cd "$repo_dir"
+    fi
   fi
 fi
 
