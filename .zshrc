@@ -44,6 +44,21 @@ mw() {
 }
 
 # ----------------------------------------
+# 🗂 Automatically cd to Codespaces workspace roo
+# ----------------------------------------t
+if [[ -n "$CODESPACES" ]]; then
+  # Default to /workspaces/<repo-name> if available
+  if [[ -d "/workspaces" && -n "$GITHUB_REPOSITORY" ]]; then
+    cd "/workspaces/$(basename "$GITHUB_REPOSITORY")"
+  elif [[ -d "$PWD" ]]; then
+    cd "$PWD"
+  fi
+fi
+
+
+# ----------------------------------------
 # 👋 Friendly neutral startup message
 # ----------------------------------------
 echo "Welcome, mortworks 👋  Terminal is ready."
+
+
