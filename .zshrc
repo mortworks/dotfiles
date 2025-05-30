@@ -1,13 +1,18 @@
 # ----------------------------------------
 # 🧠 Local environment overrides (per device)
 # ----------------------------------------
-[[ -f "${HOME}/dotfiles/local/local.zsh" ]] && source "${HOME}/dotfiles/local/local.zsh"
+[[ -f "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh" ]] && source "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles/local/local.zsh"
+[[ -f "${HOME}/dotfiles/local/codespaces.zsh" ]] && source "${HOME}/dotfiles/local/codespaces.zsh"
 
 # ----------------------------------------
-# 📁 Fallback: Set DOTFILES path if not set
+# 📁 Fallback: Set DOTFILES path if not already set
 # ----------------------------------------
 if [[ -z "$DOTFILES" ]]; then
-  export DOTFILES="${HOME}/dotfiles"
+  if [[ -d "${HOME}/dotfiles" ]]; then
+    export DOTFILES="${HOME}/dotfiles"
+  elif [[ -d "${HOME}/Workspace/Dev/Projects/mortworks/dotfiles" ]]; then
+    export DOTFILES="${HOME}/Workspace/Dev/Projects/mortworks/dotfiles"
+  fi
 fi
 
 # ----------------------------------------
