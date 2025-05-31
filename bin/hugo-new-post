@@ -1,23 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Determine where this wrapper lives (not currently used, but may help later)
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# 🚀 Wrapper for hugo-tools/bin/new.sh
 
-# Use WORKFLOW_TOOLS if available, otherwise detect based on environment
-if [[ -n "$WORKFLOW_TOOLS" ]]; then
-  TOOL_ROOT="$WORKFLOW_TOOLS/hugo-tools"
-elif [[ "$CODESPACES" == "true" ]]; then
-  TOOL_ROOT="/workspaces/workflow-tools/hugo-tools"
-else
-  TOOL_ROOT="$HOME/Workspace/Dev/Projects/mortworks/workflow-tools/hugo-tools"
-fi
+# Load tool discovery
+source "$(dirname "$0")/_ensure-tools.sh"
+source "$(dirname "$0")/_tool-helpers.sh"
 
-# Fail gracefully if the target script doesn't exist
-if [[ ! -x "$TOOL_ROOT/bin/new.sh" ]]; then
-  echo "⚠️  Could not find hugo-tools script at: $TOOL_ROOT/bin/new.sh"
-  echo "Make sure the workflow-tools repo is cloned and in the right place."
-  exit 1
-fi
+TOOL_SCRIPT="$(require_tool hugo-tools/bin/new.sh)" || exit 1
 
-# Run the actual tool with any passed arguments
-"$TOOL_ROOT/bin/new.sh" "$@"
+echo "✅ Running Hugo new post tool..."
+exec "$TOOL_SCRIPT" "$@"
