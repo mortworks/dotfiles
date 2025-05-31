@@ -57,6 +57,19 @@ if [[ ":$PATH:" != *":$DOTFILES/bin:"* ]]; then
 fi
 
 # ----------------------------------------
+# 🧰 Ensure workflow-tools is cloned
+# ----------------------------------------
+WORKFLOW_DIR="/workspaces/mortworks/workflow-tools"
+
+if [[ -n "$CODESPACES" && ! -d "$WORKFLOW_DIR" ]]; then
+  echo "📥 Cloning workflow-tools to $WORKFLOW_DIR"
+  mkdir -p "$(dirname "$WORKFLOW_DIR")"
+  git clone https://github.com/mortworks/workflow-tools.git "$WORKFLOW_DIR"
+else
+  echo "✅ workflow-tools already present or not in Codespaces"
+fi
+
+# ----------------------------------------
 # Set default shell to zsh if appropriate
 # ----------------------------------------
 if command -v zsh >/dev/null 2>&1 && [ "$SHELL" != "$(which zsh)" ]; then
