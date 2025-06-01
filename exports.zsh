@@ -1,13 +1,23 @@
-# Environment variables
+# ----------------------------------------
+# 🛠 General environment variables
+# ----------------------------------------
 
-export EDITOR="nano"  # Change to 'nvim' or 'vim' later
+# Preferred text editor
+export EDITOR="nano"  # You can change to 'vim' or 'nvim' later
 
-# Dynamically set the PROJECTS path based on environment
+# Dynamically set project root path
 if [[ "$CODESPACES" == "true" ]]; then
-  # In GitHub Codespaces
   export PROJECTS="/workspaces"
 else
-  # Local (Mac, etc.)
   export PROJECTS="$HOME/mortworks"
 fi
 
+
+# ----------------------------------------
+# 🧰 Add workflow-tools scripts to PATH (if present)
+# ----------------------------------------
+
+TOOLS_DIR="$PROJECTS/workflow-tools"
+if [[ -d "$TOOLS_DIR/hugo-tools/bin" ]]; then
+  export PATH="$TOOLS_DIR/hugo-tools/bin:$PATH"
+fi
