@@ -1,23 +1,10 @@
 # ----------------------------------------
-# 🛠 General environment variables
+# 🌍 Environment variables
 # ----------------------------------------
 
-# Preferred text editor
-export EDITOR="nano"  # You can change to 'vim' or 'nvim' later
-
-# Dynamically set project root path
-if [[ "$CODESPACES" == "true" ]]; then
-  export PROJECTS="/workspaces"
-else
-  export PROJECTS="$HOME/mortworks"
-fi
-
+export EDITOR="nano"  # Change to 'nvim' or 'vim' later
 
 # ----------------------------------------
-# 🧰 Add workflow-tools scripts to PATH (if present)
+# 📦 Load environment detection and tool path logic
 # ----------------------------------------
-
-TOOLS_DIR="$PROJECTS/workflow-tools"
-if [[ -d "$TOOLS_DIR/hugo-tools/bin" ]]; then
-  export PATH="$TOOLS_DIR/hugo-tools/bin:$PATH"
-fi
+[[ -f "$DOTFILES/lib/env.zsh" ]] && source "$DOTFILES/lib/env.zsh"

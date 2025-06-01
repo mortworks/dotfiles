@@ -77,6 +77,15 @@ fi
 # ----------------------------------------
 # 👋 Friendly neutral startup message
 # ----------------------------------------
-echo "Welcome, mortworks 👋  Terminal is ready."
-
+echo
+echo "🎉 Environment ready: GitHub Codespaces"
+echo "───────────────────────────────────────"
+echo "🧩 DOTFILES      = $DOTFILES"
+echo "🧰 TOOLS         = $TOOLS_DIR"
+echo "📦 Blog Root     = $(git rev-parse --show-toplevel 2>/dev/null || echo '(not a git repo)')"
+echo "📍 Location      = $PWD"
+echo "🐚 Shell         = $SHELL"
+echo
+echo "💡 Try: hugo-new-post"
+echo "───────────────────────────────────────"
 
