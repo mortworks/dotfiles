@@ -1,6 +1,14 @@
 # codespaces.zsh — environment overrides for GitHub Codespaces
 
+# 🌍 Set expected path to workflow-tools
 export WORKFLOW_TOOLS="/workspaces/mortworks/workflow-tools"
+
+# ➕ Add all bin directories under workflow-tools to PATH
+if [[ -d "$WORKFLOW_TOOLS" ]]; then
+  for BIN in "$WORKFLOW_TOOLS"/*/bin; do
+    [[ -d "$BIN" ]] && export PATH="$BIN:$PATH"
+  done
+fi
 
 # 📦 Ensure yq is installed in Codespaces (user-level)
 if ! command -v yq >/dev/null 2>&1; then
@@ -10,4 +18,3 @@ if ! command -v yq >/dev/null 2>&1; then
   chmod +x ~/.local/bin/yq
   export PATH="$HOME/.local/bin:$PATH"
 fi
-
