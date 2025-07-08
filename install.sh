@@ -41,6 +41,17 @@ if [[ -f "$DOTFILES/local/codespaces.zsh" ]]; then
 fi
 
 # ----------------------------------------
+# Symlink SSH config if it exists
+# ----------------------------------------
+if [[ -f "$DOTFILES/ssh/config" ]]; then
+  echo "🔐 Linking SSH config"
+  mkdir -p "$HOME/.ssh"
+  ln -sf "$DOTFILES/ssh/config" "$HOME/.ssh/config"
+else
+  echo "⚠️  No SSH config found in $DOTFILES/ssh/config — skipping"
+fi
+
+# ----------------------------------------
 # Ensure bin scripts are executable
 # ----------------------------------------
 if [[ -d "$DOTFILES/bin" ]]; then
