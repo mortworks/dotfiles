@@ -87,6 +87,8 @@ echo "📍 Location      = $PWD"
 echo "🐚 Shell         = $SHELL"
 echo
 echo "💡 Try: hugo-new-post"
-echo "🔐 SSH shortcut available: ssh krystal"
+if [[ -f ~/.ssh/config ]] && grep -q 'Host krystal' ~/.ssh/config; then
+  echo "🔐 SSH shortcut available: ssh krystal"
+fi
 echo "───────────────────────────────────────"
 
