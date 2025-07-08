@@ -87,5 +87,6 @@ echo "📍 Location      = $PWD"
 echo "🐚 Shell         = $SHELL"
 echo
 echo "💡 Try: hugo-new-post"
+echo "🔐 SSH shortcut available: ssh krystal"
 echo "───────────────────────────────────────"
 
